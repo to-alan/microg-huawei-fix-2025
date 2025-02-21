@@ -1,0 +1,15 @@
+format_version: "8"
+default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
+workflows:
+  primary:
+    steps:
+      - git-clone@6.2.1: {}
+      - brew-install@0.12.1:
+          inputs:
+            - packages: maven
+      - script@1.2.0:
+          inputs:
+            - content: |
+              #!/usr/bin/env bash
+              set -e
+              ./gradlew assembleRelease
